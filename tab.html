@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contoh Form dan Tombol Multi Iframe</title>
+    <style>
+        .iframe-wrapper {
+            margin-bottom: 70px;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="urlInput">URL:</label>
+        <input type="text" id="urlInput" name="urlInput" placeholder="Masukkan URL di sini" required>
+        <button type="submit">Tampilkan di Iframe</button>
+    </form>
+
+    <div id="iframeContainer"></div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form untuk melakukan submit
+
+            var urls = document.getElementById("urlInput").value.split(" "); // Memisahkan URL dengan spasi
+
+            for (var i = 0; i < urls.length; i++) {
+                var url = urls[i].trim(); // Menghapus spasi ekstra dari URL
+
+                if (url !== "") {
+                    var iframeWrapper = document.createElement("div"); // Membuat elemen div sebagai wrapper untuk iframe
+                    iframeWrapper.classList.add("iframe-wrapper");
+
+                    var iframe = document.createElement("iframe"); // Membuat elemen iframe baru
+                    iframe.src = url; // Menetapkan URL ke dalam atribut src iframe
+                    iframe.width = "100%"; // Menetapkan lebar iframe
+                    iframe.height = "400"; // Menetapkan tinggi iframe
+
+                    iframeWrapper.appendChild(iframe); // Menambahkan iframe ke dalam wrapper
+                    document.getElementById("iframeContainer").appendChild(iframeWrapper); // Menambahkan wrapper ke dalam container
+                }
+            }
+        });
+    </script>
+</body>
+</html>
